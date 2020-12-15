@@ -1,5 +1,4 @@
 package projet;
-import java.util.*;
 
 public class Territoire{
 	private String id;

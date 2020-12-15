@@ -1,7 +1,7 @@
 package projet;
 
 public class IllegalTerritoireId extends Exception{
-	private String territoireId;
+	private final String territoireId;
 	
 	public IllegalTerritoireId(String id){
 		super(id);

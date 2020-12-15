@@ -1,16 +1,19 @@
 package projet;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.UUID;
 
 public final class Joueur{
-	 private String ID;
-	 private ArrayList<Territoire> terrConquis;
-			
-	 public Joueur(){
-		 ID = UUID.randomUUID().toString();
-		 terrConquis = new ArrayList<Territoire>();
-	 }
-	 
-	 public String getID() {
+	private final String ID;
+	private final ArrayList<Territoire> terrConquis;
+
+	public Joueur(){
+		ID = UUID.randomUUID().toString();
+		terrConquis = new ArrayList<Territoire>();
+	}
+
+	public String getID() {
 		return ID;
 	}
 
@@ -21,8 +24,8 @@ public final class Joueur{
 	public void gagnerTerritoire(Territoire monTerritoire) {
 		terrConquis.add(monTerritoire);
 	}
-	
-	public void perdreTerritoire(String IdTerritoire) throws IllegalTerritoireId{
+
+	public void perdreTerritoire(String IdTerritoire) throws IllegalTerritoireId {
 		for(var Territoire : terrConquis) {
 			if(Territoire.getId() == IdTerritoire) {
 				terrConquis.remove(Territoire);
@@ -31,7 +34,7 @@ public final class Joueur{
 		}
 		throw new IllegalTerritoireId(IdTerritoire);
 	}
-	
+
 	public void attaquerTerritoire() {
 		Scanner scanner = new Scanner(System.in);
 		Integer idTerr;
@@ -39,14 +42,14 @@ public final class Joueur{
 		scanner.close();
 		// on modifie le territoire qu'on attaque
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Joueur [ID=" + ID + ", terrConquis=" + terrConquis + "]";
 	}
 
 	public void terminerTour() {
-		// on termine le tour	
+		// on termine le tour
 	}
 }
 
