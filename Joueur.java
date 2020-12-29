@@ -1,55 +1,76 @@
-package projet;
+package GameCore;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.UUID;
 
-public final class Joueur{
-	private final String ID;
-	private final ArrayList<Territoire> terrConquis;
+public class Joueur {
 
-	public Joueur(){
-		ID = UUID.randomUUID().toString();
-		terrConquis = new ArrayList<Territoire>();
-	}
+    private final String pseudo;
+    private final ArrayList<Territoire> terrConquis;
 
-	public String getID() {
-		return ID;
-	}
+    public Joueur(String _pseudo) {
 
-	public ArrayList<Territoire> getTerrConquis() {
-		return new ArrayList<Territoire>(terrConquis);
-	}
+        pseudo = _pseudo;
+        terrConquis = new ArrayList<>();
 
-	public void gagnerTerritoire(Territoire monTerritoire) {
-		terrConquis.add(monTerritoire);
-	}
+    }
 
-	public void perdreTerritoire(String IdTerritoire) throws IllegalTerritoireId {
-		for(var Territoire : terrConquis) {
-			if(Territoire.getId() == IdTerritoire) {
-				terrConquis.remove(Territoire);
-				return;
-			}
-		}
-		throw new IllegalTerritoireId(IdTerritoire);
-	}
+    public String getPseudo() {
+        return pseudo;
+    }
 
-	public void attaquerTerritoire() {
-		Scanner scanner = new Scanner(System.in);
-		Integer idTerr;
-		idTerr = scanner.nextInt();
-		scanner.close();
-		// on modifie le territoire qu'on attaque
-	}
+    public int getnbrTerritoire() {
 
-	@Override
-	public String toString() {
-		return "Joueur [ID=" + ID + ", terrConquis=" + terrConquis + "]";
-	}
+        return terrConquis.size();
 
-	public void terminerTour() {
-		// on termine le tour
-	}
+    }
+
+    public void addTerritoire(final Territoire ajout) {
+
+        terrConquis.add(ajout);
+
+    }
+
+    public void perdreTerritoire(Territoire territoire) {
+
+        terrConquis.remove(territoire);
+
+    }
+
+    public Integer[] attaquerTerritoire() throws InputError {
+
+        Scanner scanner = new Scanner(System.in);
+
+        int idTerrSource, idTerrCible;
+
+        try {
+            idTerrSource = scanner.nextInt();
+            idTerrCible = scanner.nextInt();
+        } catch (InputMismatchException ex) {
+
+            throw new InputError();
+
+        }
+
+        Integer[] retour = new Integer[2];
+
+        retour[0] = idTerrSource;
+        retour[1] = idTerrCible;
+
+        return retour;
+
+    }
+
+    public void terminerTour() {
+
+        System.out.println("Fin du tours joeuurs");
+
+    }
+
+    public ArrayList<Territoire> getTerrConquis() {
+
+        return terrConquis;
+
+    }
 }
-
